@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # State Architecture
 
-Where each kind of state lives, and the right library for each. React 19 + TypeScript 6 strict. Source: `~/Claude/vault/TypeScript/11 - React with TypeScript.md`, `~/Claude/vault/TypeScript/14 - Ecosystem Libraries.md`. Cross-ref: `references/architecture/01-component-patterns.md` (compound-component state), `references/architecture/03-styling-architecture.md` (theme state).
+Where each kind of state lives, and the right library for each. React 19 + TypeScript 6 strict. Cross-ref: `references/architecture/01-component-patterns.md` (compound-component state), `references/architecture/03-styling-architecture.md` (theme state).
 
 ## 1. Four kinds of UI state
 
@@ -137,7 +137,7 @@ const messages = useInfiniteQuery({
 });
 ```
 
-RSC hydration: `prefetchQuery` into a `QueryClient` on the server, dehydrate, ship to client; `<HydrationBoundary state={...}>` rehydrates without re-fetching. Cite: `~/Claude/vault/TypeScript/14.md` § Data Fetching (React).
+RSC hydration: `prefetchQuery` into a `QueryClient` on the server, dehydrate, ship to client; `<HydrationBoundary state={...}>` rehydrates without re-fetching.
 
 ## 4. URL state with nuqs
 
@@ -234,7 +234,7 @@ function SignUp() {
 | `watch("field")` | Subscribe to a field; avoid for high-frequency — re-renders the form root |
 | `mode: "onBlur" \| "onChange" \| "onSubmit"` | Validation timing — `onBlur` is the sane default |
 
-Why uncontrolled wins: a 50-field form re-renders the form root **zero times** on keystroke; controlled (`useState` per field) re-renders on every keystroke. Cite: `~/Claude/vault/TypeScript/11.md` § Forms; `~/Claude/vault/TypeScript/14.md` § Forms (React).
+Why uncontrolled wins: a 50-field form re-renders the form root **zero times** on keystroke; controlled (`useState` per field) re-renders on every keystroke.
 
 ## 6. Client state with Zustand
 
@@ -281,7 +281,7 @@ const collapsed = useAppStore((s) => s.sidebarCollapsed);
 const { theme, setTheme } = useAppStore(useShallow((s) => ({ theme: s.theme, setTheme: s.setTheme })));
 ```
 
-**TS gotcha**: always use the **curried** `create<State>()(...)` form. Non-curried fails inference once middleware wraps it — TS cannot infer the inner generic. Cite: `~/Claude/vault/TypeScript/11.md` § Zustand.
+**TS gotcha**: always use the **curried** `create<State>()(...)` form. Non-curried fails inference once middleware wraps it — TS cannot infer the inner generic.
 
 | Need | Pick |
 |---|---|
@@ -291,8 +291,6 @@ const { theme, setTheme } = useAppStore(useShallow((s) => ({ theme: s.theme, set
 | State machines / wizards / 5+ states | XState v5 |
 | Server cache | TanStack Query (not Zustand) |
 | Complex normalized state, time-travel, middleware | Redux Toolkit |
-
-Cite: `~/Claude/vault/TypeScript/11.md` § Context vs external store.
 
 ## 7. `useReducer` over `useState`
 
@@ -324,8 +322,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
 
 const [state, dispatch] = useReducer(reducer, { items: [], selectedId: null, status: "idle" });
 ```
-
-Cite: `~/Claude/vault/TypeScript/11.md` § useReducer.
 
 ## 8. Derived state — derive, don't store
 
@@ -387,7 +383,7 @@ function CommentList({ comments, channelId }: { comments: Comment[]; channelId: 
 }
 ```
 
-Failure handling: on error, surface a toast and let the next render (without `addOptimistic`) snap state back. For persistent errors, write the failure into your own state and render an "unable to send — retry" badge on the failed item. Cite: `~/Claude/vault/TypeScript/11.md` § useOptimistic.
+Failure handling: on error, surface a toast and let the next render (without `addOptimistic`) snap state back. For persistent errors, write the failure into your own state and render an "unable to send — retry" badge on the failed item.
 
 ## 10. State migrations
 
@@ -438,10 +434,6 @@ Same pattern applies to URL state (`parseAsJson<T>(schema)` — version inside t
 | Forgetting `enabled` on dependent queries | First render fires the query with `undefined` and crashes the fetcher |
 | `useQuery({ onSuccess })` (v4 pattern) | Removed in v5 — handle in `useEffect` on `data`, or move side effect to `useMutation` |
 
-Cite: `~/Claude/vault/TypeScript/11.md` § Common Anti-Patterns; `~/Claude/vault/TypeScript/14.md` § State Management.
-
 ## References
 
-- `~/Claude/vault/TypeScript/11 - React with TypeScript.md` — useReducer, useOptimistic, Context, RHF
-- `~/Claude/vault/TypeScript/14 - Ecosystem Libraries.md` — Zustand, Jotai, XState, Query, Forms
 - TanStack Query v5 (`tanstack.com/query/v5`), Zustand v5 (`github.com/pmndrs/zustand` — curried `create<S>()(...)` required with middleware), nuqs (`nuqs.47ng.com`), React Hook Form 7.x (`react-hook-form.com/ts`), Zod 4.x (`zod.dev`), React 19 (`react.dev/blog/2024/12/05/react-19`)

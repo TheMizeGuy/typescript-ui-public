@@ -9,8 +9,6 @@ audience: ui-designer
 
 Variable fonts, banned defaults, modular type scales, fluid `clamp()`, optical sizing, web font loading, microtypography, numeral features. Reference for any text decision in a 2026 codebase.
 
-Source vault: `~/Claude/vault/UI Design/04 - Typography Best Practices.md`.
-
 ## 1. Variable fonts are the default
 
 One file ships infinite weights along named axes. Smaller payload than 3+ static weights, smoother weight interpolation, runtime control via `font-variation-settings`. ~95% global support.
@@ -253,5 +251,3 @@ Reference: [MDN font-variant-numeric](https://developer.mozilla.org/en-US/docs/W
 | Line-length 100+ characters | Eye loses its place between lines | Cap at 65-75ch with `max-inline-size: 65ch` |
 | Mixing fonts of different x-heights | Visual disharmony — paired fonts look mismatched | Pair fonts with similar x-heights (Geist + Geist Mono, Söhne + Söhne Mono) |
 | Using `Inter` and `IBM Plex` together | Both neutral grotesques — no contrast | Pair geometric sans + humanist serif, or display + body cuts of the same family |
-
-(`~/Claude/vault/UI Design/04 - Typography Best Practices.md` for fuller treatment + tooling links.)

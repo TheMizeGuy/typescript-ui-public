@@ -9,8 +9,6 @@ audience: ui-designer
 
 Modular spacing scales, logical properties, container queries, subgrid, modern viewport units, intrinsic sizing, fluid spacing, vertical rhythm. Reference for every spatial decision.
 
-Source vault: `~/Claude/vault/UI Design/06 - Layout Systems.md`, `~/Claude/vault/Projects/TypeScript Dev Plugin/09 - Modern UI, Layout, and Accessibility Doctrine.md`.
-
 ## 1. Modular spacing scale
 
 A four-pixel base unit (`0.25rem`) is the dominant 2026 default — every modern UI framework converges on it (Tailwind, Radix, Material 3, Polaris, Carbon).
@@ -263,5 +261,3 @@ p + p { margin-block-start: 1lh; }  /* one line-height between paragraphs */
 | Pixel padding inside fluid type | Whitespace breaks at zoom | Use `em` for icon-to-text gap, `rem` for layout |
 | Single global breakpoint set (`sm/md/lg/xl`) on every component | Couples components to viewport | Container queries on portable components, viewport queries only at page shell |
 | Forgetting `gap` exists | `margin` between siblings rebuilds gap manually | `display: flex; gap: var(--space-s);` |
-
-(`~/Claude/vault/UI Design/06 - Layout Systems.md` for the full layout decision tree.)

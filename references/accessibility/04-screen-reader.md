@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # Screen Readers, Semantic HTML, ARIA — Reference for UI Engineers
 
-Screen readers traverse the accessibility tree, which the browser derives from semantic HTML and ARIA. Get the tree right, and screen reader users get a coherent experience. Source material: `~/Claude/vault/UI Design/08 - Accessibility.md`, MDN ARIA, W3C WAI-ARIA APG, web.dev.
+Screen readers traverse the accessibility tree, which the browser derives from semantic HTML and ARIA. Get the tree right, and screen reader users get a coherent experience. Source material: MDN ARIA, W3C WAI-ARIA APG, web.dev.
 
 ## 1. Semantic HTML first
 
@@ -443,4 +443,3 @@ Rule: automated tools catch the obvious. SR testing is manual. Before shipping m
 - WCAG 2.5.3 Label in Name: https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html
 - WebAIM — Screen Reader Testing: https://webaim.org/articles/screenreader_testing/
 - Deque — Accessible Name Computation: https://www.deque.com/axe/core-documentation/api-documentation/
-- Vault: `~/Claude/vault/UI Design/08 - Accessibility.md`

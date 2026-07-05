@@ -57,8 +57,6 @@ function render(s: UserPanelState) {
 
 Add `{ status: "stale"; data: User; refetching: true }` and the switch fails to compile until the renderer handles it.
 
-Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("Discriminated Unions and Exhaustiveness").
-
 ## Async data states
 
 Use a tagged union for any fetch lifecycle. Combine with `useReducer` once the state has 3+ related fields — `useState` chains stop scaling.
@@ -124,7 +122,7 @@ Three properties of this design:
 |---|---|
 | `state.data` is unreachable when `state.status !== "success"` | The discriminant narrowing is type-level proof |
 | Adding a new variant breaks every renderer that doesn't handle it | `assertNever` in the default branch |
-| The `catch (e: unknown)` narrowing is forced | `useUnknownInCatchVariables` (TS 6 default in strict mode); citation: `~/Claude/vault/TypeScript/02 - Compiler and tsconfig.md` (strict-flag table) |
+| The `catch (e: unknown)` narrowing is forced | `useUnknownInCatchVariables` (TS 6 default in strict mode) |
 
 Note on tooling: TanStack Query, SWR, Apollo, and Zustand each ship typed `Async`-equivalent hooks. Use them in real projects; the reducer above is the shape they encode internally.
 
@@ -184,7 +182,7 @@ function SignupForm() {
 
 Why this prevents the classic "submit button enabled while form is invalid" bug: `disabled={!canSubmit(email)}` is the **only** way to enable the button, and `canSubmit` is a type predicate. There's no boolean to forget to AND together.
 
-For real forms reach for React Hook Form + Zod (`zodResolver` infers `FormValues` from the schema; `formState.errors` is typed per field). Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Forms").
+For real forms reach for React Hook Form + Zod (`zodResolver` infers `FormValues` from the schema; `formState.errors` is typed per field).
 
 ## Modal / drawer / overlay state
 
@@ -286,8 +284,6 @@ const [state, dispatch] = useReducer(reducer, initial);
 
 Add `{ type: "invertSelection" }` to `Action` and the reducer fails to compile (`assertNever` rejects the now-non-`never` action). The exhaustiveness anchor turns "did I update every consumer?" into a build-time question.
 
-Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("`useReducer` with discriminated unions").
-
 ## URL state vs server state vs client state
 
 Stuffing all three into `useState` is the root cause of stale-modal-after-back-button, refetch-storm, and "two tabs see different filters" bugs. Each has a tool.
@@ -369,8 +365,6 @@ Three rules at the boundary:
 | Validate `unknown` → `T` exactly once, at the network/storage edge | Every layer revalidating duplicates work; every layer trusting a previous layer leaks raw `any` |
 | Wrap `catch` in `instanceof Error` or `Result.fromThrowable` | TS 6 defaults `catch (e)` to `unknown`; reading `.message` without narrow is a compile error |
 | Don't rethrow with the raw `e: unknown` if upstream callers expect `Error` | `throw e instanceof Error ? e : new Error(String(e))` keeps the contract |
-
-Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("`any` vs `unknown` vs `never`", "catch clauses"); `~/Claude/vault/TypeScript/02 - Compiler and tsconfig.md` (strict-flag `useUnknownInCatchVariables`).
 
 ## Cross-references
 

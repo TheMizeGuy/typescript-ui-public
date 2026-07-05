@@ -39,8 +39,6 @@ Why not `React.FC`:
 | Hardcoded return type `ReactElement \| null` | Cannot return `string`, `number`, `Iterable<ReactNode>` directly even though React permits them |
 | Loses inference on default-prop destructuring | Default values widen instead of narrowing |
 
-Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Component Typing").
-
 ### `interface` vs `type` for props
 
 Use `interface` for component props (declaration merging is harmless on a closed Props shape, error messages are slightly cleaner, extends is symmetrical with `extends React.ButtonHTMLAttributes<...>`). Use `type` for unions/tuples/utility compositions:
@@ -155,7 +153,7 @@ Use:
 </Tabs.Root>
 ```
 
-The `setTabValue` switch is the proof: add `{ kind: "external"; ... }` to `TabsState` and the `default` branch fails to compile. Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("Discriminated Unions and Exhaustiveness").
+The `setTabValue` switch is the proof: add `{ kind: "external"; ... }` to `TabsState` and the `default` branch fails to compile.
 
 ## Polymorphic components (`as` prop)
 
@@ -197,8 +195,6 @@ export function Box<C extends React.ElementType = "div">(
 | Ref forwarding (when needed) | Use `React.ComponentPropsWithRef<C>["ref"]` |
 
 React 19 simplification: `ref` is now a regular prop. The legacy `forwardRef` wrapper around polymorphic components (with its module-augmentation hack to preserve generics) is no longer needed — declare `ref?: React.ComponentPropsWithRef<C>["ref"]` on `BoxOwnProps` if you want explicit typing, or just let `ComponentPropsWithoutRef<C>` flow through.
-
-Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Polymorphic Components", "React 19 Changes").
 
 ## Slot-based components (Radix-style `asChild`)
 
@@ -347,8 +343,6 @@ Useful helpers:
 
 Legacy cleanup: every `React.forwardRef<E, P>(...)` wrapper can be deleted; expose `ref?: Ref<E>` on `P` and pass it through. The generic-`forwardRef` cast hack and the `declare module "react"` augmentation override become unnecessary.
 
-Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("React 19 Changes", "forwardRef (Legacy Path)").
-
 ## Variants with CVA
 
 `class-variance-authority` (`cva`) + `clsx`/`tailwind-merge` is the canonical 2026 pattern for typed component variants.
@@ -414,8 +408,6 @@ What `VariantProps` gives you: `variant?: "primary" | "secondary" | "ghost" | "d
 | `class MyComponent extends React.Component` for new components | `function MyComponent` + hooks | Classes don't get `use()`, action hooks, server components, or future React features |
 | Generic `withGeneric<T>(Component)` HOC | Plain generic function component | HOCs strip generics by default; the workarounds (cast back to a generic call signature) cost more than just writing a function |
 | `connect(mapStateToProps, mapDispatchToProps)(Component)` (Redux 4-) | `const x = useSelector(s => s.x)`, `useDispatch()` | Same wrapper-hell rationale; modern Redux Toolkit ships hook-first |
-
-Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Common Anti-Patterns").
 
 ## Cross-references
 

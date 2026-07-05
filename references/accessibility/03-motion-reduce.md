@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # Reduced Motion — Reference for UI Engineers
 
-`prefers-reduced-motion` is the OS-level signal that a user wants less animation. Honoring it is not optional. Source material: `~/Claude/vault/UI Design/08 - Accessibility.md`, MDN, web.dev.
+`prefers-reduced-motion` is the OS-level signal that a user wants less animation. Honoring it is not optional. Source material: MDN, web.dev.
 
 ## 1. Why `prefers-reduced-motion` matters
 
@@ -346,5 +346,4 @@ Or via CSS, neutralize the default transition under reduced motion:
 - MDN View Transition API: https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API
 - Motion docs — useReducedMotion: https://motion.dev/docs/react-use-reduced-motion
 - Tailwind motion-safe / motion-reduce: https://tailwindcss.com/docs/hover-focus-and-other-states#motion
-- Vault: `~/Claude/vault/UI Design/08 - Accessibility.md`
 - Pope Tech — Design Accessible Animation: https://pope.tech/blog/accessible-animation

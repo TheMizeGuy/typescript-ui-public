@@ -270,9 +270,9 @@ Reranker: pass the Voyage `rerank-2.5` (or equivalent) post-processor block, `<y
 ### Obsidian vault (optional)
 
 Agents can supplement the reference files with depth from a vault, if one is configured, e.g.:
-- `~/Claude/vault/TypeScript/` (18 files)
-- `~/Claude/vault/UI Design/` (12 files)
-- `~/Claude/vault/SEO/` (Core Web Vitals deep reference)
+- Your own TypeScript reference vault, if you keep one
+- Your own UI design reference vault, if you keep one
+- Your own SEO reference vault, if you keep one (Core Web Vitals deep reference)
 
 Without a vault, agents rely entirely on the 26 plugin reference files. Adjust the paths to match your own notes.
 

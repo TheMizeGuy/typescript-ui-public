@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # Styling Architecture
 
-Token cascade, source-of-truth choice, Tailwind v4 + design tokens, CVA, theming, and the cascade-layer rules that make all of it predictable. Source: `~/Claude/vault/UI Design/09 - Design Systems.md`, `~/Claude/vault/TypeScript/11 - React with TypeScript.md`. Cross-ref: `references/architecture/01-component-patterns.md` § CVA, `references/design/06-shadcn-customization.md`.
+Token cascade, source-of-truth choice, Tailwind v4 + design tokens, CVA, theming, and the cascade-layer rules that make all of it predictable. Cross-ref: `references/architecture/01-component-patterns.md` § CVA, `references/design/06-shadcn-customization.md`.
 
 ## 1. The token cascade
 
@@ -49,7 +49,7 @@ Pick by where the design lives and how many platforms ship it.
 | **DTCG W3C JSON** | Standardize across teams or vendor-neutral | Any compliant tool consumes | Format only; needs a transformer |
 | **Figma Variables (alone)** | Pure design exploration, no engineering handoff yet | None | Drift the moment code is written |
 
-W3C DTCG (Design Tokens Community Group) format released 2025.10 — first stable. Cite: `~/Claude/vault/UI Design/09.md` § W3C Design Tokens.
+W3C DTCG (Design Tokens Community Group) format released 2025.10 — first stable.
 
 ## 3. Three-tier token example
 
@@ -192,8 +192,6 @@ function Card({ padding, tone, interactive, className, ...rest }: CardProps) {
 | 3+ axes or compound interactions | CVA — required; compound variants are otherwise unmaintainable |
 | Slot-based composition (`Tabs.Root` styles `Tabs.Trigger` differently when active) | `tailwind-variants` (slots support) |
 
-Cite: `~/Claude/vault/TypeScript/11.md` § Tailwind + TS.
-
 ## 6. CSS Modules vs Tailwind
 
 | Concern | Tailwind | CSS Modules |
@@ -207,7 +205,7 @@ Cite: `~/Claude/vault/TypeScript/11.md` § Tailwind + TS.
 | Refactor a token | One `@theme` edit | Find/replace across `.module.css` |
 | Type safety on class names | Strings, but variants typed via CVA | `typed-css-modules` plugin or `experimental.typedCSSModules` |
 
-Heuristic: design system + product app -> Tailwind + CVA. Marketing site with one-off art direction -> CSS Modules (or vanilla-extract if you want zero-runtime + types). Cite: `~/Claude/vault/TypeScript/11.md` § Styling Types.
+Heuristic: design system + product app -> Tailwind + CVA. Marketing site with one-off art direction -> CSS Modules (or vanilla-extract if you want zero-runtime + types).
 
 ## 7. `tailwind-merge` + `cn` helper
 
@@ -349,7 +347,7 @@ Brand = a complete swap of semantic tokens. Component tokens inherit; primitive 
 
 Combine `[data-brand]` x `[data-theme]` for `brand x theme` matrices: `:root[data-brand="acme"][data-theme="dark"] { --color-accent: ... }`. Avoid stacking more than two axes — at three you've reinvented Sass mixins poorly.
 
-W3C DTCG `$extensions` field supports brand inheritance (`com.tokens.extends: "Brand A"`) — useful when one brand is a tweak of another. Cite: `~/Claude/vault/UI Design/09.md` § Multi-Brand Theming.
+W3C DTCG `$extensions` field supports brand inheritance (`com.tokens.extends: "Brand A"`) — useful when one brand is a tweak of another.
 
 ## 11. Anti-patterns
 
@@ -368,12 +366,8 @@ W3C DTCG `$extensions` field supports brand inheritance (`com.tokens.extends: "B
 | Two sources of truth: tokens in Figma AND tokens hand-written in CSS | Pick one source; sync the other via Tokens Studio or similar |
 | Documentation separate from component code | Storybook autodocs + MDX co-located; design docs in Zeroheight reference the same tokens |
 
-Cite: `~/Claude/vault/UI Design/09.md` § Anti-Patterns.
-
 ## References
 
-- `~/Claude/vault/UI Design/09 - Design Systems.md` — W3C tokens, three-tier hierarchy, multi-brand, naming
-- `~/Claude/vault/TypeScript/11 - React with TypeScript.md` § Tailwind + TS — CVA, vanilla-extract, tailwind-merge
 - W3C Design Tokens Specification 2025.10 — `https://design-tokens.github.io/community-group/format/`
 - Tailwind v4 docs — `https://tailwindcss.com/docs` (CSS-first config)
 - `class-variance-authority` 0.7+ — `https://cva.style`

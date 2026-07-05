@@ -9,8 +9,6 @@ audience: ui-designer
 
 Spring physics, native CSS easing, View Transitions API, scroll-driven animations, performance budgets, reduced motion, micro-interactions, stagger orchestration. Reference for every animated decision.
 
-Source vault: `~/Claude/vault/UI Design/07 - Motion Design.md`, `~/Claude/vault/UI Design/12 - Emerging Trends 2025-2026.md`.
-
 ## 1. Spring physics over duration-based easing
 
 Springs are described by physical parameters (stiffness, damping, mass), not a duration. They overshoot, settle, and inherit velocity from gestures — they feel alive in a way no cubic-bezier ever will.
@@ -205,7 +203,7 @@ Animation timeline driven by scroll position, fully native CSS, runs on the comp
 
 References: [MDN scroll-timeline](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline), [scroll-driven-animations.style](https://scroll-driven-animations.style).
 
-Caveat from `~/Claude/vault/Projects/TypeScript Dev Plugin/09 - Modern UI, Layout, and Accessibility Doctrine.md`: scroll-driven is appropriate for polish, not for correctness-critical UI. Wrap behind reduced-motion.
+Caveat: scroll-driven is appropriate for polish, not for correctness-critical UI. Wrap behind reduced-motion.
 
 ## 5. Animation performance budget
 
@@ -358,5 +356,3 @@ animate(".list-item", { opacity: 1, y: 0 },
 | `transition: all` | Animates unintended properties (color, layout) on theme switch | List explicit properties |
 | Scroll-jacking carousels | Removes user scroll control | Native scroll-snap + scroll-driven animation |
 | Hover-only reveals on touch UI | Touch has no hover | Tap-to-toggle or always-visible on touch via `(hover: hover)` MQ |
-
-(`~/Claude/vault/UI Design/07 - Motion Design.md` for the full performance tier table and tools.)
