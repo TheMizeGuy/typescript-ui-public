@@ -4,7 +4,7 @@ Internal map of files, responsibilities, and cross-references. Not loaded by Cla
 
 ## Mission
 
-A team of Opus specialists that designs, reviews, optimizes, and improves TypeScript UI code so the result looks like a senior human design team shipped it. No generic AI tells. Strict TS6 type safety. Sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS. WCAG 2.2 + APCA contrast. Distinctive aesthetic point-of-view per project, not a recycled template.
+A team of specialists -- running on the session model, always the strongest available Claude -- that designs, reviews, optimizes, and improves TypeScript UI code so the result looks like a senior human design team shipped it. No generic AI tells. Strict TS6 type safety. Sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS. WCAG 2.2 + APCA contrast. Distinctive aesthetic point-of-view per project, not a recycled template.
 
 ## Layout
 
@@ -18,7 +18,7 @@ typescript-ui/
 │   ├── typescript-review-ui/SKILL.md   "review my UI / check this component"
 │   ├── typescript-optimize-ui/SKILL.md "optimize for Core Web Vitals / faster LCP"
 │   └── typescript-improve-ui/SKILL.md  "improve / refactor / make this better"
-├── agents/                  (6 Opus specialists)
+├── agents/                  (6 specialists, session-model)
 │   ├── ui-design-architect.md       creative direction + greenfield design
 │   ├── ui-design-reviewer.md        visual / UX / a11y audit
 │   ├── ui-perf-engineer.md          CWV + bundle + render perf

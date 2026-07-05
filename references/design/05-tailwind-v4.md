@@ -9,7 +9,7 @@ audience: ui-designer
 
 CSS-first config, OKLCH defaults, container queries first-class, native cascade layers, dynamic utilities, subgrid, performance, and migration path. Reference for any Tailwind decision in a 2026 codebase.
 
-Source: W3C, MDN, web.dev. Official: [tailwindcss.com/docs](https://tailwindcss.com/docs).
+Source vault: `~/Claude/vault/UI Design/12 - Emerging Trends 2025-2026.md`. Official: [tailwindcss.com/docs](https://tailwindcss.com/docs).
 
 ## 1. Why v4 over v3
 
@@ -322,4 +322,4 @@ Run `npx @tailwindcss/upgrade` for a mostly-mechanical migration. Manual checkli
 | Class string >300 chars on a single element | Unreadable; impossible to diff | Extract to a `tv()` variant or component class |
 | Forgetting `darkMode` strategy in v4 | Default is `prefers-color-scheme`; class-based needs custom variant | Define `@custom-variant dark` once |
 
-( for the framework-landscape table.)
+(`~/Claude/vault/UI Design/12 - Emerging Trends 2025-2026.md` for the framework-landscape table.)

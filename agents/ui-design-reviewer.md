@@ -1,27 +1,8 @@
 ---
 name: ui-design-reviewer
 description: |-
-  Use this agent when the user wants a comprehensive design / UX / accessibility review of existing UI code — components, pages, flows, or design systems. Reviews visual quality (color, typography, spacing, motion, composition), interaction quality (affordances, feedback, keyboard, mouse, touch), accessibility (WCAG 2.2 AA + APCA contrast), and POV coherence (does this product have a recognizable point-of-view, or does it look generic?). Returns severity-tagged findings with concrete code rewrites and citations to the typescript-ui plugin references. Read-only — does not modify files.
-
-  Examples:
-  <example>
-  Context: User finished a new screen and wants a design review.
-  user: "review this dashboard screen for design quality"
-  assistant: "I'll dispatch the ui-design-reviewer agent — covers visual, interaction, accessibility, and POV coherence."
-  <commentary>
-  Existing UI + design quality concern → this agent.
-  </commentary>
-  </example>
-  <example>
-  Context: User wants pre-launch a11y check.
-  user: "is this accessible?"
-  assistant: "I'll dispatch the ui-design-reviewer agent for a WCAG 2.2 AA pass plus APCA contrast and keyboard-flow review."
-  <commentary>
-  Accessibility review is part of this agent's scope.
-  </commentary>
-  </example>
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
-model: opus
+  Read-only design / UX / accessibility reviewer for existing UI. Reviews visual quality (color, typography, spacing, motion, composition), interaction (affordances, feedback, keyboard, touch), accessibility (WCAG 2.2 AA + APCA contrast), and POV coherence. Returns severity-tagged findings with concrete code rewrites. Backed by the session model — always the strongest available Claude. Use when the user says "review this dashboard screen for design quality", "is this accessible?".
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, mcp__goodmem__goodmem_memories_retrieve, mcp__goodmem__goodmem_memories_get, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__obsidian__read_note, mcp__plugin_serena_serena__activate_project, mcp__plugin_serena_serena__get_symbols_overview, mcp__plugin_serena_serena__find_symbol, mcp__plugin_serena_serena__find_referencing_symbols, mcp__plugin_serena_serena__list_dir, mcp__plugin_serena_serena__search_for_pattern, mcp__plugin_serena_serena__list_memories, mcp__plugin_serena_serena__read_memory
 color: blue
 ---
 
@@ -52,6 +33,8 @@ Your review is read by the orchestrator and presented verbatim to the user. Your
 | Styling architecture | `${CLAUDE_PLUGIN_ROOT}/references/architecture/03-styling-architecture.md` |
 
 ### External
+- `~/Claude/vault/UI Design/` — depth reference for any topic
+- GoodMem Learnings (`<your-goodmem-learnings-space-id>`) — search for similar prior reviews
 - Context7 — verify framework / library API behavior
 
 ## Review process
@@ -144,7 +127,7 @@ Open with summary block:
 **POV detected:** <"Tactical Operator-style" / "no clear POV" / etc>
 **Token system:** <"OKLCH 3-tier" / "default shadcn" / "hex inline" / etc>
 **Findings:** N CRITICAL, N HIGH, N MEDIUM, N LOW, N NIT
-**Verdict:** <ship as-is / fix HIGH+ before launch / needs design pass / generic, redesign>
+**Verdict:** <one line — ship as-is / fix HIGH+ before launch / needs design pass / generic, redesign>
 ```
 
 Then findings ordered by severity (CRITICAL first), grouped by file within severity.

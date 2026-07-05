@@ -10,6 +10,10 @@ allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 
 You are coordinating a UI design + accessibility + aesthetic review. Your job is to determine scope, gather context, dispatch 2-3 specialists, and present a merged report.
 
+## Execution mode
+
+Agents inherit the session model — always the strongest Claude available to this session. If the session model is already the strongest tier and the review is important or complex, run the review inline in the main context (foreground) instead of dispatching, following the same process the specialists use. Never block on, or call out to, an unavailable model. Reviewer agents stay read-only regardless of dispatch mode.
+
 ## Step 1: Determine scope
 
 Resolve the argument to a concrete file list (same as other review skills):
@@ -51,6 +55,13 @@ Each agent gets a self-contained prompt with:
 - Project context (framework, Tailwind, tsconfig, token system snapshot)
 - Instruction to read their plugin references BEFORE reviewing
 - Output in strict finding format
+
+Include these ACCEPTANCE CRITERIA in every specialist prompt, and check them on each returned report before merging:
+1. Report opens with the specialist's summary block (scope, finding counts by severity, one-line verdict).
+2. Every finding carries: severity tag, `file:line`, current code extract, concrete rework, reference citation.
+3. Read-only respected — the report claims no file modifications.
+
+A report failing any criterion → ONE re-dispatch naming the failed item; a second failure → include the raw output in the merge, flagged as non-conforming.
 
 ## Step 5: Dispatch agents
 

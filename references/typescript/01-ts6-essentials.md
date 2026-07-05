@@ -23,7 +23,7 @@ Covers the TS 6.0 baseline (released 2026-03-23, current LTS line as of 2026-04-
 | `target` | `es5` was historical | shifted modern; `es5` discouraged | UI runtimes are evergreen; `es5` blocks modern emit and bloats output |
 | Legacy module formats | `amd`, `umd`, `systemjs`, `none`, `outFile`-era | effectively gone | UI bundlers don't use them |
 
-Source: see plugin reference files. TS 6.0 is the **bridge release** to native TS 7 (`tsgo`); flags removed in TS 6 are hard errors in 7.
+Source: `~/Claude/vault/TypeScript/17 - TypeScript 6 and 7 Migration Playbook.md`. TS 6.0 is the **bridge release** to native TS 7 (`tsgo`); flags removed in TS 6 are hard errors in 7.
 
 ## Required tsconfig for UI projects
 
@@ -108,7 +108,7 @@ Node UI tooling (Vite config, Storybook node side, build scripts):
 }
 ```
 
-Citations: see referenced standards (Strictest preset, Vite preset, module decision matrix) (2026 baseline).
+Citations: `~/Claude/vault/TypeScript/02 - Compiler and tsconfig.md` (Strictest preset, Vite preset, module decision matrix); `~/Claude/vault/Projects/TypeScript Dev Plugin/07 - TypeScript 2026 Defaults and Toolchain Decisions.md` (2026 baseline).
 
 ## Strictness ladder for existing projects
 
@@ -138,7 +138,7 @@ TS 6.0 emits deprecation warnings for behaviors that hard-fail in TS 7. Treat wa
 | Floating compiler defaults (`strict`, `module`, `target`, `types`, `rootDir` unset) | Always set these explicitly |
 | Numeric `enum`, namespace-with-values, parameter properties, `import =`/`export =` | Forbidden under `erasableSyntaxOnly: true`; rewrite as union + `as const` object |
 
-Citations: see referenced standards ("Mandatory 5.9 → 6.0 edits", "Legacy options and patterns to remove").
+Citations: `~/Claude/vault/TypeScript/17 - TypeScript 6 and 7 Migration Playbook.md` ("Mandatory 5.9 → 6.0 edits", "Legacy options and patterns to remove").
 
 ## tsgo native preview status
 
@@ -151,7 +151,7 @@ Citations: see referenced standards ("Mandatory 5.9 → 6.0 edits", "Legacy opti
 | Large monorepos where `tsc` cold-start dominates | Editor tsserver — tsserver is still TS 6 |
 | Side-by-side validation (run both, compare) | Declaration emit for published libraries (incomplete) |
 
-Run side by side, never replace. Keep `typescript@^6.0` as the canonical compiler for emit, declarations, editor, and tooling. Citation: see plugin reference files ("TS7 evaluation lane").
+Run side by side, never replace. Keep `typescript@^6.0` as the canonical compiler for emit, declarations, editor, and tooling. Citation: `~/Claude/vault/TypeScript/17 - TypeScript 6 and 7 Migration Playbook.md` ("TS7 evaluation lane").
 
 ## Anti-patterns banned in UI code
 
@@ -170,7 +170,7 @@ Run side by side, never replace. Keep `typescript@^6.0` as the canonical compile
 | Class component with new code | Function component + hooks | Class lifecycle is legacy; React 19 ships ref-as-prop, action hooks, server components — none target classes |
 | `useRef<HTMLInputElement>()` (zero-arg) | `useRef<HTMLInputElement>(null)` | React 19 + `@types/react@^19` removed the zero-arg form |
 
-Citations: see referenced standards ("Anti-Patterns" table, "Enums vs Unions vs `as const`") ("Component Typing", "Common Anti-Patterns") (TS 5.8 `erasableSyntaxOnly`).
+Citations: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("Anti-Patterns" table, "Enums vs Unions vs `as const`"); `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Component Typing", "Common Anti-Patterns"); `~/Claude/vault/TypeScript/13 - Modern TypeScript Features.md` (TS 5.8 `erasableSyntaxOnly`).
 
 ## Verifying the config
 
@@ -204,7 +204,7 @@ CI script:
 }
 ```
 
-Citations: see referenced standards (Performance flags, Emit flags).
+Citations: `~/Claude/vault/TypeScript/02 - Compiler and tsconfig.md` (Performance flags, Emit flags).
 
 ## Cross-references
 

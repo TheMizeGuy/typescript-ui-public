@@ -1,7 +1,7 @@
 ---
 name: typescript-improve-ui
 description: |-
-  Use this skill when the user asks to comprehensively improve existing UI — design + performance + type safety + anti-AI aesthetics in one pass. Triggers: "improve this UI", "make this better", "make this god tier", "polish these components", "refactor the UI", "level up the design", "make this look like a human team built it", "full UI pass", "improve everything". Dispatches the typescript-ui:ui-team-lead Opus orchestrator which coordinates 4 specialist agents in parallel (design reviewer, anti-slop auditor, perf engineer, TS engineer), deduplicates findings, and produces a unified improvement plan ordered by impact. This is the heavy-hitter — use when the user wants the full treatment.
+  Use this skill when the user asks to comprehensively improve existing UI — design + performance + type safety + anti-AI aesthetics in one pass. Triggers: "improve this UI", "make this better", "make this god tier", "polish these components", "refactor the UI", "level up the design", "make this look like a human team built it", "full UI pass", "improve everything". Dispatches the typescript-ui:ui-team-lead orchestrator (runs on the session model) which coordinates 4 specialist agents in parallel (design reviewer, anti-slop auditor, perf engineer, TS engineer), deduplicates findings, and produces a unified improvement plan ordered by impact. This is the heavy-hitter — use when the user wants the full treatment.
 argument-hint: '[path | file | "staged" | "diff" | "pr" | "all"]'
 allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 ---
@@ -9,6 +9,10 @@ allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 # Improve UI
 
 You are coordinating a comprehensive multi-specialist UI improvement pass. This is the plugin's flagship skill — it dispatches the team lead who orchestrates 4 specialist agents.
+
+## Execution mode
+
+Agents inherit the session model — always the strongest Claude available to this session. If the session model is already the strongest tier and the improvement pass is important or complex, run the pass inline in the main context (foreground) instead of dispatching, following the same 4-specialist process the team lead uses. Never block on, or call out to, an unavailable model. The 4 specialist reviewers stay read-only regardless of dispatch mode.
 
 ## Step 1: Determine scope
 
@@ -23,7 +27,7 @@ Same resolution rules as `typescript-review-ui` / `typescript-optimize-ui`:
 Include all UI-relevant files: components, pages, layouts, styles, theme config, tsconfig. Exclude standard patterns.
 
 Warning thresholds:
-- >100 files: "This is a large scope. The team lead will dispatch 4 Opus agents in parallel — this will take several minutes. Continue or narrow the scope?"
+- >100 files: "This is a large scope. The team lead will dispatch 4 agents in parallel — this will take several minutes. Continue or narrow the scope?"
 - 0 files: tell user and suggest alternatives.
 
 ## Step 2: Pre-flight context (parallel, comprehensive)
@@ -83,23 +87,32 @@ TASK:
 
 HARD RULES:
 - Dispatch real agents. Don't simulate their output.
-- Opus agents only.
+- Agents inherit the session model — never pinned, never Haiku.
 - Foreground execution.
 - Deduplicate cross-agent findings.
 - No AI slop.
+
+ACCEPTANCE CRITERIA (merged report is rejected if any fails):
+1. Summary block present with per-dimension status and total finding counts by severity.
+2. All 4 specialists accounted for — a report per specialist, or a named failure with its error.
+3. Findings deduplicated, sequentially numbered, severity-ordered; every finding keeps file:line + rework + reference.
+4. Improvement plan present with all four passes (quick wins / design / perf / type safety).
 ```
 
 ## Step 4: Dispatch the team lead
 
-- `subagent_type`: `"typescript-ui:ui-team-lead"`
+Dispatch via `general-purpose`, not the plugin namespace — `ui-team-lead` declares the `Agent` tool to dispatch its 4 specialists, and plugin-namespaced dispatch silently strips it at runtime (mem `019d8bcb`; see the RUNTIME DISPATCH NOTE in `agents/ui-team-lead.md`). Read `${CLAUDE_PLUGIN_ROOT}/agents/ui-team-lead.md` and inline its body as the prompt prefix.
+
+- `subagent_type`: `"general-purpose"`
 - `description`: `"Full UI improvement: N files"`
-- `prompt`: the prompt from Step 3
+- `prompt`: the full body of `agents/ui-team-lead.md`, then the prompt from Step 3
 - Foreground
 
 ## Step 5: Present results
 
-1. Show the team lead's merged report verbatim.
-2. Prompt:
+1. Gate the merged report against the ACCEPTANCE CRITERIA from Step 3. Any failure → ONE re-dispatch naming the failed criterion; a second failure → present flagged.
+2. Show the team lead's merged report verbatim.
+3. Prompt:
    ```
    This is the full improvement report from 4 specialist agents. Apply changes? Options:
    - "all CRITICAL" / "all CRITICAL and HIGH"
@@ -109,10 +122,11 @@ HARD RULES:
    - "everything in <filename>"
    - "skip"
    ```
-3. If the user picks, apply each finding's suggested rework using Edit/Write.
-4. After applying a batch, offer:
+4. If the user picks, apply each finding's suggested rework using Edit/Write.
+5. After applying a batch, offer:
    - Re-run the full improvement pass to verify the fixes
    - Run individual skills (`typescript-review-ui`, `typescript-optimize-ui`) on specific areas
+   - Write a GoodMem learning if a non-obvious pattern came up
 
 ## Step 6: Post-application verification
 
@@ -124,7 +138,7 @@ After applying any fixes:
 
 ## Anti-patterns
 
-- Don't dispatch the team lead for a single-dimension review. Use `typescript-review-ui` (design), `typescript-optimize-ui` (perf), or a TS senior review plugin.
+- Don't dispatch the team lead for a single-dimension review. Use `typescript-review-ui` (design), `typescript-optimize-ui` (perf), or the TS senior review plugin.
 - Don't dispatch without comprehensive project context — the team lead needs it for all 4 sub-agents.
 - Don't summarize the report.
 - Don't auto-apply.

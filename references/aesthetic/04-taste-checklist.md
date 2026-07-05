@@ -174,5 +174,11 @@ Verdict: [SHIP | NEEDS WORK]
 | The catalog of AI tells (referenced by every audit item) | `references/aesthetic/01-anti-ai-tells.md` |
 | How to set the POV that the audit is checking against | `references/aesthetic/02-point-of-view.md` |
 | Distinctive systems to compare against (smell test 9.6) | `references/aesthetic/03-distinctive-systems.md` |
-| Code-level review checklist | `~/.claude/plugins/cache/anti-slop/anti-slop/1.3.0/skills/anti-slop/references/frontend-patterns.md` |
-| Component-fingerprint catalog | `~/.claude/plugins/cache/anti-slop/anti-slop/1.3.0/skills/anti-slop/references/design-patterns.md` |
+| Code-level review checklist | `~/.claude/plugins/cache/anti-slop/anti-slop/<version>/skills/anti-slop/references/frontend-patterns.md` |
+| Component-fingerprint catalog | `~/.claude/plugins/cache/anti-slop/anti-slop/<version>/skills/anti-slop/references/design-patterns.md` |
+
+Resolve `<version>` at read time — version-pinned cache paths rot on every anti-slop release:
+
+```bash
+ls ~/.claude/plugins/cache/anti-slop/anti-slop/ | sort -V | tail -1
+```

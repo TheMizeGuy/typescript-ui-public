@@ -9,7 +9,7 @@ audience: ui-designer
 
 Replacing the AI-tell defaults — tokens, typography, recompositions, dropping to Radix, distinctive icons, custom motion, and a taste audit. Reference for any project built on shadcn primitives.
 
-Source: W3C, MDN, web.dev. shadcn docs: [ui.shadcn.com](https://ui.shadcn.com).
+Source vault: `~/Claude/vault/UI Design/12 - Emerging Trends 2025-2026.md`. shadcn docs: [ui.shadcn.com](https://ui.shadcn.com).
 
 ## 1. shadcn defaults are AI-tells
 
@@ -31,7 +31,7 @@ Every AI-built site converges on the same shadcn shell. Pattern-recognizable in 
 
 ## 2. Replace the theme tokens
 
-shadcn ships a token set in `app/globals.css`. Replace it with a project-specific OKLCH ramp. See `references/design/01-color-oklch.md` for ramp generation.
+shadcn ships a token set in `app/globals.css`. Replace it with a project-specific OKLCH ramp. See `~/Claude/plugins/typescript-ui/references/design/01-color-oklch.md` for ramp generation.
 
 ```css
 /* Replace shadcn's default :root + .dark tokens entirely */
@@ -90,7 +90,7 @@ shadcn ships a token set in `app/globals.css`. Replace it with a project-specifi
 
 ## 3. Replace the typography stack
 
-shadcn's default `--font-sans` is system stack or Inter. Replace it with a paired typeface set with intent. See `references/design/02-typography.md` for the banned/approved list.
+shadcn's default `--font-sans` is system stack or Inter. Replace it with a paired typeface set with intent. See `~/Claude/plugins/typescript-ui/references/design/02-typography.md` for the banned/approved list.
 
 ```css
 @theme {
@@ -294,7 +294,7 @@ Standardize one stroke weight, one corner radius for line-style icons, one set t
 
 ## 7. Custom motion on shadcn primitives
 
-shadcn defaults animate via `tailwindcss-animate`. Replace with explicit transitions or Motion springs for components that touch the user's gesture surface. See `references/design/04-motion.md`.
+shadcn defaults animate via `tailwindcss-animate`. Replace with explicit transitions or Motion springs for components that touch the user's gesture surface. See `~/Claude/plugins/typescript-ui/references/design/04-motion.md`.
 
 ```tsx
 // Replace the default Tabs underline with a morphing pill via View Transitions
@@ -360,7 +360,7 @@ Recipes that signal "designed", not "scaffolded":
 
 ## 9. Anti-pattern checklist (taste audit)
 
-Run this list before shipping. Each line that's true = one AI-tell to fix. Sourced from real user feedback: the user rejects designs that look "bolted together" and will recognize generic AI aesthetics immediately.
+Run this list before shipping. Each line that's true = one AI-tell to fix. Sourced from the user's own goodmem design-quality rejection feedback: the user rejects designs that look "bolted together" and will recognize generic AI aesthetics immediately.
 
 | Tell | Fix |
 |---|---|

@@ -5,3 +5,7 @@
 .env
 .env.*
 node_modules/
+.serena/
+.claude/
+.anti-slop/
+.remember/

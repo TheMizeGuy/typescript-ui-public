@@ -82,7 +82,7 @@ If the team can defend why each derived value differs, the system has integrity.
 |---|---------|----------------|----------------|
 | T1 | Inter as primary font | The most-trained font in the LLM corpus, free, ships with shadcn, Vercel uses it | Banned as primary in distinctive design. Use only as utility/UI label fallback. Pick a font with personality: GT America, Söhne, ABC Diatype, Author, Switzer, Inter Display Variable for technical character, IBM Plex Sans for editorial-warm |
 | T2 | Roboto / Helvetica / Arial as primary | Default system fonts, zero risk in training | Banned. Same reasoning as Inter. If you must use a system font, use it deliberately as an aesthetic statement (Notion-style "system as honesty"), not as a fallback |
-| T3 | Newsreader + JetBrains Mono pairing | Recognizable AI output — widely reproduced in AI-generated UIs | Banned. Pick fresh pairings: Söhne + Söhne Mono, Author + GT America Mono, Inter Display + Berkeley Mono, Editorial New + ABC Monument Grotesk Mono |
+| T3 | Newsreader + JetBrains Mono pairing | Recognizable AI output (cited verbatim from goodmem rejection memory) | Banned by user. Pick fresh pairings: Söhne + Söhne Mono, Author + GT America Mono, Inter Display + Berkeley Mono, Editorial New + ABC Monument Grotesk Mono |
 | T4 | Geist Sans + Geist Mono unmodified | Vercel's distribution makes this a tell now -- every Vercel-deployed AI project ships with it | Geist is fine if it suits the project; just override the font feature settings, weights, and tracking so it doesn't read as default. Or pick something else |
 | T5 | All-caps tracking-wide subtitles `text-xs uppercase tracking-wider` | Overlines on table headers, section labels | Use sparingly and with intent. If used: tighter tracking (`tracking-wide` not `tracking-widest`), small-caps via `font-feature-settings: 'smcp'` instead of `text-transform: uppercase` (better letter-spacing) |
 | T6 | Display serif numerals (large `01`, `02`, `03`) | Was distinctive in 2022 (Stripe Press, Linear changelog), now generic | Skip unless integral to the brand. Numbers as section markers read as decoration; use functional headers instead |
@@ -156,7 +156,7 @@ If the brief doesn't fit any of these, design the composition before designing t
 | S9 | DropdownMenu with default arrow indicator | shadcn primitive default | Match indicator to the rest of the icon system (Phosphor caret if Phosphor, custom chevron if branded). Or remove entirely and let position cue the dropdown |
 | S10 | Skeleton loader on content that loads in <300ms | Loading-state reflex | Skeletons are for content that takes 300ms+ to arrive. Sub-300ms loads should use direct render or a brief opacity-fade. Skeletons on fast loads add perceived latency |
 | S11 | "Most Popular" floating badge on middle pricing tier | Pricing-card formula | Vary tier emphasis: lead with the recommended plan at full size, deemphasize others. Or use comparison table layout. The floating badge is a top-3 AI tell |
-| S12 | Stats card with `$45,231.89 +20.1% from last month` | Verbatim from shadcn dashboard demo | Real stats. Real numbers. Real comparison context (vs last week, vs target, vs benchmark). The exact value `$45,231.89` is in LLM training sets as a fingerprint |
+| S12 | Stats card with `$45,231.89 +20.1% from last month` | Verbatim from shadcn dashboard demo | Real stats. Real numbers. Real comparison context (vs last week, vs target, vs benchmark). The exact value `$45,231.89` is in the model's training data as a fingerprint |
 
 ### shadcn defaults that MUST be overridden
 
@@ -324,5 +324,11 @@ If the designer can't answer most of these confidently, the design hasn't earned
 | How to fix the underlying problem (commit to a point-of-view) | `references/aesthetic/02-point-of-view.md` |
 | Distinctive systems to study (and not over-imitate) | `references/aesthetic/03-distinctive-systems.md` |
 | Pre-ship audit checklist | `references/aesthetic/04-taste-checklist.md` |
-| Code-level anti-patterns (React, CSS, perf) | `~/.claude/plugins/cache/anti-slop/anti-slop/1.3.0/skills/anti-slop/references/frontend-patterns.md` |
-| The component-fingerprint catalog | `~/.claude/plugins/cache/anti-slop/anti-slop/1.3.0/skills/anti-slop/references/design-patterns.md` |
+| Code-level anti-patterns (React, CSS, perf) | `~/.claude/plugins/cache/anti-slop/anti-slop/<version>/skills/anti-slop/references/frontend-patterns.md` |
+| The component-fingerprint catalog | `~/.claude/plugins/cache/anti-slop/anti-slop/<version>/skills/anti-slop/references/design-patterns.md` |
+
+Resolve `<version>` at read time — version-pinned cache paths rot on every anti-slop release:
+
+```bash
+ls ~/.claude/plugins/cache/anti-slop/anti-slop/ | sort -V | tail -1
+```

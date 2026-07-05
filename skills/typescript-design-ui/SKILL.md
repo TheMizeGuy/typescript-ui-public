@@ -1,14 +1,18 @@
 ---
 name: typescript-design-ui
 description: |-
-  Use this skill when the user asks to design new UI — a screen, flow, page, component, or full product. Triggers: "design a [thing]", "build me a [screen/page/flow]", "create the UI for", "design the [dashboard/settings/onboarding/landing]", "make this look [distinctive/professional/not AI]". Dispatches the typescript-ui:ui-design-architect Opus agent which commits to a distinctive aesthetic POV, generates a token system (OKLCH + variable fonts + modular spacing + spring motion), and produces production-grade TypeScript + React + Tailwind v4 code that does not look AI-generated. Uses the anti-AI-tells catalogue (108 patterns) as a hard floor and the taste checklist as a pre-ship gate.
+  Use this skill when the user asks to design new UI — a screen, flow, page, component, or full product. Triggers: "design a [thing]", "build me a [screen/page/flow]", "create the UI for", "design the [dashboard/settings/onboarding/landing]", "make this look [distinctive/professional/not AI]". Dispatches the typescript-ui:ui-design-architect agent (runs on the session model) which commits to a distinctive aesthetic POV, generates a token system (OKLCH + variable fonts + modular spacing + spring motion), and produces production-grade TypeScript + React + Tailwind v4 code that does not look AI-generated. Uses the anti-AI-tells catalogue (108 patterns) as a hard floor and the taste checklist as a pre-ship gate.
 argument-hint: '<brief description of what to design>'
 allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 ---
 
 # Design UI
 
-You are coordinating new UI design on the user's behalf. Your job is to gather project context, construct a self-contained prompt, and dispatch the `typescript-ui:ui-design-architect` agent (Opus).
+You are coordinating new UI design on the user's behalf. Your job is to gather project context, construct a self-contained prompt, and dispatch the `typescript-ui:ui-design-architect` agent, which inherits the session model.
+
+## Execution mode
+
+Agents inherit the session model — always the strongest Claude available to this session. If the session model is already the strongest tier and the design task is important or complex, design inline in the main context (foreground) instead of dispatching, following the same knowledge sources and process as `ui-design-architect`. Never block on, or call out to, an unavailable model.
 
 ## Step 1: Parse the brief
 
@@ -71,6 +75,14 @@ HARD RULES:
 - prefers-reduced-motion honored on all decorative animation.
 - APCA Lc 75+ on body text.
 - No emojis, no AI slop, no trailing summary.
+
+ACCEPTANCE CRITERIA (output is rejected if any fails):
+1. POV statement present, 3-4 sentences, names what the design does NOT do.
+2. Token block present; every color value is oklch(...); states derived via relative color syntax.
+3. Every requested component has a file path + complete code (no elided bodies).
+4. At least one full composition example in real JSX.
+5. Taste audit table present with PASS/FAIL per checklist section.
+6. Zero hits for: #6366f1, #14b8a6, #000000, #ffffff, "lorem", "Get started", "Submit", "TODO".
 ```
 
 ## Step 4: Dispatch the agent
@@ -83,8 +95,9 @@ Use the Agent tool:
 
 ## Step 5: Present results
 
-1. Display the agent's output verbatim. Do not summarize or reformat.
-2. Prompt:
+1. Gate the output against the ACCEPTANCE CRITERIA from Step 3 (all six, mechanically). Any failure → ONE re-dispatch naming the exact failed criterion. A second failure → present anyway, flagging the gap explicitly.
+2. Display the agent's output verbatim. Do not summarize or reformat.
+3. Prompt:
    ```
    Apply this design to the project? Options:
    - "apply all" — write every component + token file
@@ -93,8 +106,8 @@ Use the Agent tool:
    - "revise [aspect]" — adjust POV/colors/typography/layout
    - "skip" — take the output and apply yourself
    ```
-3. If the user asks to apply, YOU (the orchestrator) create the files using Write/Edit. Do not re-dispatch the agent.
-4. After applying, offer to run `typescript-review-ui` on the new components for a second-opinion audit.
+4. If the user asks to apply, YOU (the orchestrator) create the files using Write/Edit. Do not re-dispatch the agent.
+5. After applying, offer to run `typescript-review-ui` on the new components for a second-opinion audit.
 
 ## When to skip parts
 

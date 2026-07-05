@@ -9,7 +9,7 @@ audience: ui-designer
 
 Perceptually uniform color, Display P3 gamut, semantic 3-tier tokens, APCA contrast, light-dark() and relative color syntax. Authoritative reference for any color decision in a 2026 codebase.
 
-
+Source vault: `~/Claude/vault/UI Design/05 - Color Theory and Systems.md`, `~/Claude/vault/UI Design/12 - Emerging Trends 2025-2026.md`.
 
 ## 1. Why OKLCH wins in 2026
 
@@ -63,7 +63,7 @@ Perceptually uniform color, Display P3 gamut, semantic 3-tier tokens, APCA contr
 
 ## 3. The 3-tier token system
 
-Three layers — primitive, semantic, component. Components only ever read semantic tokens; semantic tokens only ever resolve to primitives. ([W3C Design Tokens 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/)).
+Three layers — primitive, semantic, component. Components only ever read semantic tokens; semantic tokens only ever resolve to primitives. ([W3C Design Tokens 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/), `~/Claude/vault/UI Design/09 - Design Systems.md`).
 
 | Tier | Example | Purpose |
 |---|---|---|
@@ -233,4 +233,4 @@ P3 ships on every modern Apple display (iPhone 7+, iPad Pro 2017+, every M-serie
 | `filter: invert()` for dark mode | Inverts photos, maps, video, illustrations — visually wrong | Author dual values via `light-dark()` per token |
 | `transparent` over a colored surface | `transparent` = `rgba(0,0,0,0)`; multiplies dark when used over color | Use `oklch(L C H / 0)` or `color-mix(in oklch, var(--surface), transparent)` |
 
-([web.dev OKLCH](https://web.dev/articles/high-definition-css-color-guide)).
+([web.dev OKLCH](https://web.dev/articles/high-definition-css-color-guide), `~/Claude/vault/UI Design/05 - Color Theory and Systems.md`).

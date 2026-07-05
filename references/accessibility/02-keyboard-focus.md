@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # Keyboard and Focus — Reference for UI Engineers
 
-Focus management is where most UI-engineering accessibility bugs live. Source material: W3C WAI-ARIA APG, MDN.
+Focus management is where most UI-engineering accessibility bugs live. Source material: `~/Claude/vault/UI Design/08 - Accessibility.md`, W3C WAI-ARIA APG, MDN.
 
 ## 1. Why keyboard navigation is non-negotiable
 
@@ -433,6 +433,6 @@ Implications:
 - MDN `inert`: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inert
 - web.dev — Control focus with tabindex: https://web.dev/articles/control-focus-with-tabindex
 - web.dev — Keyboard: https://web.dev/learn/accessibility/keyboard/
-- 
+- Vault: `~/Claude/vault/UI Design/08 - Accessibility.md`
 - Radix Dialog (reference implementation): https://www.radix-ui.com/primitives/docs/components/dialog
 - React Aria FocusScope: https://react-spectrum.adobe.com/react-aria/FocusScope.html

@@ -1,27 +1,8 @@
 ---
 name: ui-perf-engineer
 description: |-
-  Use this agent when the user wants a Core Web Vitals / performance audit of UI code — LCP, INP, CLS, bundle size, font loading, image optimization, rendering performance, or React-specific hydration and server component patterns. Read-only review that returns severity-tagged findings with concrete code rewrites. Can run Lighthouse, tsc, and bundle analysis if tooling is available.
-
-  Examples:
-  <example>
-  Context: User's LCP is above 2.5s.
-  user: "optimize my LCP"
-  assistant: "I'll dispatch the ui-perf-engineer agent — it'll trace the LCP element, audit preloading, SSR, and image format, and propose specific fixes."
-  <commentary>
-  CWV performance diagnosis → this agent.
-  </commentary>
-  </example>
-  <example>
-  Context: User wants a perf audit before launch.
-  user: "check the performance of these pages before we ship"
-  assistant: "I'll dispatch the ui-perf-engineer agent for a full CWV + bundle + rendering review."
-  <commentary>
-  Pre-launch perf review → this agent.
-  </commentary>
-  </example>
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
-model: opus
+  Read-only Core Web Vitals / performance auditor for UI code. Reviews LCP, INP, CLS, bundle size, font loading, image optimization, rendering, and React hydration + server components. Returns severity-tagged findings with concrete code rewrites; can run Lighthouse / tsc / bundle analysis when tooling is available. Backed by the session model — always the strongest available Claude. Use when the user says "optimize my LCP", "perf audit before launch".
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, mcp__goodmem__goodmem_memories_retrieve, mcp__goodmem__goodmem_memories_get, mcp__context7__resolve-library-id, mcp__context7__query-docs, mcp__obsidian__read_note, mcp__plugin_serena_serena__activate_project, mcp__plugin_serena_serena__get_symbols_overview, mcp__plugin_serena_serena__find_symbol, mcp__plugin_serena_serena__find_referencing_symbols, mcp__plugin_serena_serena__list_dir, mcp__plugin_serena_serena__search_for_pattern, mcp__plugin_serena_serena__list_memories, mcp__plugin_serena_serena__read_memory
 color: yellow
 ---
 
@@ -39,9 +20,12 @@ You are a SENIOR FRONTEND PERFORMANCE ENGINEER. You measure before opining, you 
 | Bundle + loading (code split, images, fonts, prefetch, bfcache) | `${CLAUDE_PLUGIN_ROOT}/references/performance/04-bundle-loading.md` |
 | Measurement tools + RUM | `${CLAUDE_PLUGIN_ROOT}/references/performance/05-measurement.md` |
 | Tailwind v4 perf implications | `${CLAUDE_PLUGIN_ROOT}/references/design/05-tailwind-v4.md` |
+| V8 runtime patterns | `~/Claude/vault/TypeScript/06 - Runtime Performance.md` |
 
 ### External
+- GoodMem Learnings — search for perf findings on similar stacks
 - Context7 — verify React 19 / Next.js 15 API surface (Suspense boundaries, useReportWebVitals, fetchPriority)
+- `~/Claude/vault/SEO/05 - Core Web Vitals and Performance.md` — deep SEO-perf crossover
 
 ## Review process
 

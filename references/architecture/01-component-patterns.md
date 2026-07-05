@@ -7,7 +7,7 @@ audience: ui-engineer
 
 # Component Patterns
 
-Concrete patterns for React 19 + TypeScript 6 strict, with the typing boilerplate that actually works in 2026. Source: see plugin reference files. Cross-ref: `references/architecture/02-state-architecture.md` (where state lives), `references/architecture/03-styling-architecture.md` (CVA, tokens).
+Concrete patterns for React 19 + TypeScript 6 strict, with the typing boilerplate that actually works in 2026. Source: `~/Claude/vault/TypeScript/11 - React with TypeScript.md`, `~/Claude/vault/UI Design/09 - Design Systems.md`. Cross-ref: `references/architecture/02-state-architecture.md` (where state lives), `references/architecture/03-styling-architecture.md` (CVA, tokens).
 
 ## 1. Pattern selection matrix
 
@@ -234,7 +234,7 @@ const toneClass = { neutral: "bg-surface", subtle: "bg-subtle", loud: "bg-accent
 | Ref typed for the chosen element | `ComponentPropsWithRef<C>["ref"]` (React 19: ref is a prop) |
 | Generic + legacy `forwardRef` | Module-augment `forwardRef` to preserve generics, or upgrade to React 19 and drop `forwardRef` |
 
-When a polymorphic component would change behavior with the tag (focus management, keyboard nav, ARIA defaults), **stop and split** — `<LinkButton>` and `<Button>` are clearer than one `<Button as="a">`. Cite: see plugin reference files § Polymorphic Components.
+When a polymorphic component would change behavior with the tag (focus management, keyboard nav, ARIA defaults), **stop and split** — `<LinkButton>` and `<Button>` are clearer than one `<Button as="a">`. Cite: `~/Claude/vault/TypeScript/11.md` § Polymorphic Components.
 
 ## 5. Headless hook pattern
 
@@ -374,7 +374,7 @@ Why this beats `clsx({ "bg-blue-600": intent === "primary", ... })`:
 | Refactor a variant | Find/replace strings | Rename one key |
 | Storybook/MDX surface | Hand-written prop list | Auto from variants |
 
-Cite: see plugin reference files § Tailwind + TS.
+Cite: `~/Claude/vault/TypeScript/11.md` § Tailwind + TS.
 
 ## 8. Composition over configuration
 
@@ -429,13 +429,13 @@ Document the API in TSDoc on the props interface. Re-export types (`export type 
 | Inline arrow handlers in lists breaking memo | Lift handler up; pass `data-id` and read in handler |
 | Polymorphic component whose behavior changes with `as` | Split into named components (`<LinkButton>` vs `<Button>`) |
 
-Anti-pattern source: see plugin reference files § Common Anti-Patterns.
+Anti-pattern source: `~/Claude/vault/TypeScript/11.md` § Common Anti-Patterns.
 
 ## References
 
--  — component typing, Polymorphic, forwardRef, React 19, anti-patterns
--  — UI library landscape
--  — three-tier tokens, component API patterns
+- `~/Claude/vault/TypeScript/11 - React with TypeScript.md` — component typing, Polymorphic, forwardRef, React 19, anti-patterns
+- `~/Claude/vault/TypeScript/14 - Ecosystem Libraries.md` — UI library landscape
+- `~/Claude/vault/UI Design/09 - Design Systems.md` — three-tier tokens, component API patterns
 - `references/architecture/02-state-architecture.md` — where compound-component state lives
 - `references/architecture/03-styling-architecture.md` — CVA + tokens + theming
 - React 19 release notes — `https://react.dev/blog/2024/12/05/react-19`

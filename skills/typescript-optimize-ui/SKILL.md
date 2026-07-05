@@ -1,7 +1,7 @@
 ---
 name: typescript-optimize-ui
 description: |-
-  Use this skill when the user asks to optimize UI performance — Core Web Vitals (LCP, INP, CLS), bundle size, rendering performance, font loading, image optimization, or React-specific patterns (compiler, RSC, Suspense, hydration). Triggers: "optimize my UI", "make it faster", "fix LCP", "reduce bundle size", "optimize for Core Web Vitals", "performance audit", "speed up the page", "reduce CLS", "fix INP". Dispatches the typescript-ui:ui-perf-engineer Opus agent which measures first (Lighthouse / tsc / bundle analysis if available), then produces severity-tagged findings with estimated metric impact and concrete code fixes.
+  Use this skill when the user asks to optimize UI performance — Core Web Vitals (LCP, INP, CLS), bundle size, rendering performance, font loading, image optimization, or React-specific patterns (compiler, RSC, Suspense, hydration). Triggers: "optimize my UI", "make it faster", "fix LCP", "reduce bundle size", "optimize for Core Web Vitals", "performance audit", "speed up the page", "reduce CLS", "fix INP". Dispatches the typescript-ui:ui-perf-engineer agent (runs on the session model) which measures first (Lighthouse / tsc / bundle analysis if available), then produces severity-tagged findings with estimated metric impact and concrete code fixes.
 argument-hint: '[path | file | "staged" | "diff" | "pr" | "all"]'
 allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 ---
@@ -9,6 +9,10 @@ allowed-tools: Bash, Read, Grep, Glob, TodoWrite, Agent
 # Optimize UI
 
 You are coordinating a performance review and optimization of UI code. Your job is to gather context, dispatch the perf engineer, and present actionable results.
+
+## Execution mode
+
+Agents inherit the session model — always the strongest Claude available to this session. If the session model is already the strongest tier and the performance task is important or complex, run the review inline in the main context (foreground) instead of dispatching, following the same measurement-first process as `ui-perf-engineer`. Never block on, or call out to, an unavailable model. The perf engineer stays read-only regardless of dispatch mode.
 
 ## Step 1: Determine scope
 
@@ -67,6 +71,12 @@ HARD RULES:
 - Show the fix. Current → reworked code.
 - Cite references.
 - No AI slop.
+
+ACCEPTANCE CRITERIA (report is rejected if any fails):
+1. Summary block present: scope, likely LCP element, tooling status, budget check, finding counts, verdict.
+2. Every finding has a quantified impact line ("+Xms LCP" / "+X KB JS" / "+0.0X CLS") — measured, or cited from a reference.
+3. Every finding: current code + verbatim-applicable fix + reference citation.
+4. Tooling section states what ran and what was unavailable — no silent skips.
 ```
 
 ## Step 4: Dispatch
@@ -77,8 +87,9 @@ HARD RULES:
 
 ## Step 5: Present results
 
-1. Show verbatim.
-2. Prompt:
+1. Gate the report against the ACCEPTANCE CRITERIA from Step 3. Any failure → ONE re-dispatch naming the failed criterion; a second failure → present flagged.
+2. Show verbatim.
+3. Prompt:
    ```
    Apply any of these optimizations? Tell me which:
    - "all CRITICAL" / "all CRITICAL and HIGH"
@@ -86,7 +97,7 @@ HARD RULES:
    - "everything in <filename>"
    - "skip"
    ```
-3. If user picks, apply with Edit/Write. After applying:
+4. If user picks, apply with Edit/Write. After applying:
    - Run `tsc --noEmit` to verify fixes compile
    - Run build if possible to check bundle size delta
    - Offer to re-run the perf review to verify improvement

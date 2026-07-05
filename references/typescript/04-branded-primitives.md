@@ -27,7 +27,7 @@ Real bugs caught by branding, real bugs missed without it:
 
 Real example from the wild: a checkout flow that reads `discountPercent` (0–100) and applies it as `total * discountPercent`, expecting `discountPercent` to be `0..1`. Brand `Percent01` and `Percent100` and the bug doesn't compile.
 
-Citation: see plugin reference files ("Branded (Opaque, Nominal) Types", "Avoiding primitive obsession").
+Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("Branded (Opaque, Nominal) Types", "Avoiding primitive obsession").
 
 ## The Brand pattern
 
@@ -71,7 +71,7 @@ type Email  = Tagged<string, "Email">;
 
 Same shape as encoding A but the helper documents intent. Recommended for projects already on `type-fest`.
 
-All three compile to nothing — the brand is a phantom type. Citation: see plugin reference files ("The pattern", "effect-ts Brand module").
+All three compile to nothing — the brand is a phantom type. Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("The pattern", "effect-ts Brand module").
 
 ## Smart constructors with validation
 
@@ -127,7 +127,7 @@ type AccountId = Brand<string, "AccountId">;
 const AccountId = (s: string): AccountId => s as AccountId;
 ```
 
-Pattern from effect-ts: `Brand.refined<T>(predicate, errorFactory)` for validated; `Brand.nominal<T>()` for passthrough. Citation: see plugin reference files ("effect-ts Brand module").
+Pattern from effect-ts: `Brand.refined<T>(predicate, errorFactory)` for validated; `Brand.nominal<T>()` for passthrough. Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("effect-ts Brand module").
 
 ## UI primitive brand catalogue
 
@@ -209,7 +209,7 @@ const me: User = UserSchema.parse(data);
 //                ^? UserId, Email, OklchColor are all branded -- safe to flow into UI
 ```
 
-This is where brands pay back the most: validate once at the API edge; types flow branded through every component, hook, and reducer downstream. Citation: see plugin reference files ("Zod + schema inference").
+This is where brands pay back the most: validate once at the API edge; types flow branded through every component, hook, and reducer downstream. Citation: `~/Claude/vault/TypeScript/11 - React with TypeScript.md` ("Zod + schema inference").
 
 valibot equivalent (`v.brand`, `v.parse`) ships smaller bundles — drop-in for projects on the valibot stack.
 
@@ -254,7 +254,7 @@ Pitfall: `JSON.stringify(branded)` returns the underlying primitive; `JSON.parse
 | Two brands with the same string tag | `Brand<string, "Id">` defined in two places means they're the same type | Use distinct tags (`"UserId"` vs `"OrderId"`) or `unique symbol` |
 | Trying to brand a `readonly`/`const` literal | `as const satisfies T` then brand later | Apply the brand on the final value, not the literal-typed source |
 
-Citation: see plugin reference files ("Avoiding primitive obsession", "Anti-Patterns" rows on `as` casts).
+Citation: `~/Claude/vault/TypeScript/03 - Best Practices and Idioms.md` ("Avoiding primitive obsession", "Anti-Patterns" rows on `as` casts).
 
 ## Cross-references
 

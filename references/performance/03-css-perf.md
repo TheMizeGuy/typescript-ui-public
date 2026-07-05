@@ -272,7 +272,7 @@ Source: https://github.com/danielroe/beasties, https://web.dev/articles/extract-
 
 Migration warning: `@apply` with large utility chains still inlines every declaration. Prefer component classes for genuinely reusable composition; use `@apply` only for small primitives.
 
-Source: https://tailwindcss.com/docs/v4-beta, https://tailwindcss.com/blog/tailwindcss-v4.
+Source: https://tailwindcss.com/docs, https://tailwindcss.com/blog/tailwindcss-v4.
 
 ## Anti-patterns
 
