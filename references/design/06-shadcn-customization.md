@@ -360,7 +360,7 @@ Recipes that signal "designed", not "scaffolded":
 
 ## 9. Anti-pattern checklist (taste audit)
 
-Run this list before shipping. Each line that's true = one AI-tell to fix. Sourced from the user's own goodmem design-quality rejection feedback: the user rejects designs that look "bolted together" and will recognize generic AI aesthetics immediately.
+Run this list before shipping. Each line that's true = one AI-tell to fix. The bar: a design-literate reviewer rejects work that looks "bolted together" and recognizes generic AI aesthetics immediately.
 
 | Tell | Fix |
 |---|---|
