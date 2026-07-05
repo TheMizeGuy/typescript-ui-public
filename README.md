@@ -32,53 +32,19 @@ All reviews are read-only. Findings are advisory. You pick which to apply.
 
 ## Installation
 
-### Method 1: Claude Code plugin directory (recommended)
-
 ```bash
-git clone https://github.com/TheMizeGuy/typescript-ui-public.git ~/.claude/plugins/typescript-ui
+# 1. Add this repo as a marketplace
+claude plugin marketplace add https://github.com/TheMizeGuy/typescript-ui-public.git
+
+# 2. Install the plugin
+claude plugin install typescript-ui@typescript-ui-public
+
+# 3. Restart Claude Code for the plugin to load
 ```
 
-Then add to your Claude Code settings (`~/.claude/settings.json`):
+After restart, verify with `claude plugin list`. Updates ship through the same channel: when a new release lands, run `claude plugin marketplace update typescript-ui-public` then `claude plugin update typescript-ui@typescript-ui-public`, or accept the update prompt in `/plugin`.
 
-```json
-{
-  "enabledPlugins": {
-    "typescript-ui": true
-  }
-}
-```
-
-Restart Claude Code. The 4 skills and 6 agents load immediately.
-
-### Method 2: Direct plugin directory (single session)
-
-```bash
-claude --plugin-dir /path/to/typescript-ui-public
-```
-
-Loads the plugin for one session without touching settings.
-
-### Method 3: Plugin cache
-
-`<version>` is the `version` field in `.claude-plugin/plugin.json` (currently `0.2.1`) -- use the current value, not a stale directory name.
-
-```bash
-git clone https://github.com/TheMizeGuy/typescript-ui-public.git /tmp/typescript-ui-public
-mkdir -p ~/.claude/plugins/cache/typescript-ui/<version>
-cp -R /tmp/typescript-ui-public/{.claude-plugin,agents,skills,references,README.md,ARCHITECTURE.md} \
-  ~/.claude/plugins/cache/typescript-ui/<version>/
-```
-
-### Verify installation
-
-After restarting Claude Code, type any of these -- if the skill triggers, it's installed:
-
-```
-/typescript-ui:typescript-design-ui
-/typescript-ui:typescript-review-ui
-/typescript-ui:typescript-optimize-ui
-/typescript-ui:typescript-improve-ui
-```
+Manual alternative: `git clone https://github.com/TheMizeGuy/typescript-ui-public.git` and load with `claude --plugin-dir <path>`.
 
 ## Quick start
 
