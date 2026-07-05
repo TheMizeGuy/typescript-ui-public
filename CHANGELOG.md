@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+- Executor model selection v2 (tracks the private source): specialist executor dispatches are conductor-selected -- Sonnet 5 at `xhigh` or Opus 4.8, picked by the work's judgment depth. Conductor-gated; never below `xhigh` for Sonnet; never Haiku.
+
 ## 0.2.1
 
 - Model policy: removed every `model: fable` pin from agent frontmatter. Agents now inherit the session model (always the strongest available Claude) instead of pinning a specific one; operative prose ("Backed by Fable 5", "Fable 5 specialists") rewritten to "the session model -- always the strongest available Claude". Skills gained an "Execution mode" note allowing the orchestrator to run a workflow inline when the session model is already top-tier and the task warrants it.
