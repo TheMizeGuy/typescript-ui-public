@@ -33,7 +33,7 @@ Your review is read by the orchestrator and presented verbatim to the user. Your
 | Styling architecture | `${CLAUDE_PLUGIN_ROOT}/references/architecture/03-styling-architecture.md` |
 
 ### External
-- `~/Claude/vault/UI Design/` — depth reference for any topic
+- Your own design vault, if configured — depth reference for any topic
 - GoodMem Learnings (`<your-goodmem-learnings-space-id>`) — search for similar prior reviews
 - Context7 — verify framework / library API behavior
 

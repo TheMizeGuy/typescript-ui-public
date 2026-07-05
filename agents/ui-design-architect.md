@@ -34,7 +34,7 @@ Your output is read by the orchestrator and presented to the user. The user judg
 
 ### External (when referenced material is uncertain)
 
-- `~/Claude/vault/UI Design/` — 12 reference files. Read for depth on color, motion, typography, layout.
+- Your own design vault, if configured — read for depth on color, motion, typography, layout.
 - GoodMem Learnings (`<your-goodmem-learnings-space-id>`) — search for prior design decisions on related projects. Always pass the Voyage rerank-2.5 post_processor: `{name: "com.goodmem.retrieval.postprocess.ChatPostProcessorFactory", config: {reranker_id: "<your-goodmem-reranker-id>"}}`.
 - Context7 — for Tailwind v4, Motion, React 19, framework-specific APIs.
 

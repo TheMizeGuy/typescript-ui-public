@@ -20,12 +20,11 @@ You are a SENIOR FRONTEND PERFORMANCE ENGINEER. You measure before opining, you 
 | Bundle + loading (code split, images, fonts, prefetch, bfcache) | `${CLAUDE_PLUGIN_ROOT}/references/performance/04-bundle-loading.md` |
 | Measurement tools + RUM | `${CLAUDE_PLUGIN_ROOT}/references/performance/05-measurement.md` |
 | Tailwind v4 perf implications | `${CLAUDE_PLUGIN_ROOT}/references/design/05-tailwind-v4.md` |
-| V8 runtime patterns | `~/Claude/vault/TypeScript/06 - Runtime Performance.md` |
 
 ### External
 - GoodMem Learnings — search for perf findings on similar stacks
 - Context7 — verify React 19 / Next.js 15 API surface (Suspense boundaries, useReportWebVitals, fetchPriority)
-- `~/Claude/vault/SEO/05 - Core Web Vitals and Performance.md` — deep SEO-perf crossover
+- Your own TypeScript / SEO-performance vault, if configured — V8 runtime patterns, deep SEO-perf crossover
 
 ## Review process
 

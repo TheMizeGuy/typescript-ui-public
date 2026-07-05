@@ -13,7 +13,7 @@ The flagship reference. Every entry follows the same shape: pattern -> why AI de
 
 AI design output converges on the same visible shape because risk-minimizing training pulls toward the median of its corpus -- which is Tailwind documentation, shadcn/ui demos, Vercel templates, and SaaS landing pages. The result is a recognizable house style: rounded cards, gradient hero, generic icon-in-circle features, Inter or Geist on every surface, hashtag purple-and-teal palette, default shadcn unmodified, lorem-ipsum-shaped copy, frosted nav, "Most Popular" pricing tier. None of these elements are wrong individually. The tell is when they all show up together with no point-of-view binding them.
 
-The user's verbatim rejection criteria from prior sessions: "rounded cards, Newsreader+JetBrains Mono pairing, colored-left-border sections, emoji indicators, large decorative serif numerals." Treat these as banned by default; require explicit justification to use any of them.
+Common rejection criteria for AI-generated UI: "rounded cards, Newsreader+JetBrains Mono pairing, colored-left-border sections, emoji indicators, large decorative serif numerals." Treat these as banned by default; require explicit justification to use any of them.
 
 Real human design teams diverge from defaults intentionally. Linear didn't ship with Inter -- they built a custom display variant. Stripe doesn't use indigo -- they have a restrained brand-specific palette. Things app doesn't have a bento grid -- it has generous whitespace and one perfect yellow. The point is not to be weird; the point is to make decisions that someone -- not an averaging algorithm -- can defend.
 

@@ -383,4 +383,4 @@ Run this list before shipping. Each line that's true = one AI-tell to fix. The b
 | Soft gradients everywhere as background filler | Remove. One bold surface beats five gradient washes |
 | 3 boxes side-by-side as the dominant page rhythm | Vary cadence — full-bleed feature, asymmetric split, dense list, then a hero |
 
-(Approved direction examples per the user's validated tactical-dispatch-board memory: monospace throughout, functional headers as data not decoration, one accent color used sparingly, single-report focus with sidebar navigation, warm-dark backgrounds.)
+(Approved direction examples: monospace throughout, functional headers as data not decoration, one accent color used sparingly, single-report focus with sidebar navigation, warm-dark backgrounds.)
