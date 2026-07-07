@@ -1,7 +1,7 @@
 {
   "name": "typescript-ui",
-  "version": "0.2.2",
-  "description": "TypeScript 6 UI engineering team. Designs, reviews, optimizes, and improves UI code so it looks like a human design team built it — distinctive aesthetic point-of-view, OKLCH color systems, variable typography, motion with spring physics, sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS, and TS6 strict-mode type safety with branded primitives, discriminated unions, and exhaustiveness. Six specialists (design architect, design reviewer, performance engineer, TypeScript engineer, anti-AI auditor, team lead), running on the session model, backed by self-contained references on TS6, Tailwind v4 + OKLCH + APCA, anti-AI-aesthetic patterns, Core Web Vitals, WCAG 2.2 + reduced motion, and component architecture (compound, polymorphic, slot). Four user-invoked skills: typescript-design-ui, typescript-review-ui, typescript-optimize-ui, typescript-improve-ui. Read-only by default; the orchestrator applies findings only on explicit user approval.",
+  "version": "0.3.0",
+  "description": "TypeScript 6/7 UI engineering team. Designs, reviews, optimizes, and improves UI code so it looks like a human design team built it — distinctive aesthetic point-of-view, OKLCH color systems, variable typography, motion with spring physics, sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS, and TS6/7 strict-mode type safety (verified with the tsgo TypeScript 7 gate) with branded primitives, discriminated unions, and exhaustiveness. Six specialists (design architect, design reviewer, performance engineer, TypeScript engineer, anti-AI auditor, team lead), running on the session model, backed by self-contained references on TS6/7 + the tsgo gate, Tailwind v4 + OKLCH + APCA, anti-AI-aesthetic patterns, Core Web Vitals, WCAG 2.2 + reduced motion, and component architecture (compound, polymorphic, slot). Four user-invoked skills: typescript-design-ui, typescript-review-ui, typescript-optimize-ui, typescript-improve-ui. Read-only by default; the orchestrator applies findings only on explicit user approval.",
   "author": {
     "name": "TheMizeGuy",
     "email": "ben@meipath.com"
@@ -11,6 +11,7 @@
   "keywords": [
     "typescript",
     "typescript-6",
+    "tsgo",
     "ui",
     "ux",
     "design",

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Adopted the tsgo / TypeScript 7 standard: tsgo (`@typescript/native-preview`) is the primary and only typecheck gate across the plugin's guidance. `references/typescript/01-ts6-essentials.md` retitled to "TypeScript 6/7 Essentials", its "native preview status / run side by side, never replace" section rewritten as "tsgo -- the typecheck gate", the CI script block now maps `typecheck` to `tsgo --noEmit` with `typecheck:ts6` as the legacy lane, and the verify-config tables put `tsgo --noEmit` as the canonical CI gate.
+- `ui-typescript-engineer`: runs `tsgo --noEmit` as the gate (tsc fallback with a mandatory adoption finding), angle 1 now checks that `npm run typecheck` is the tsgo gate, description updated to TS6/7.
+- Skills (`typescript-optimize-ui`, `typescript-improve-ui`): post-application verification and tooling steps run the tsgo gate instead of bare `tsc --noEmit`.
+- README / ARCHITECTURE / plugin.json refreshed to TS6/7 + tsgo-gate wording; `tsgo` keyword added.
+
 ## 0.2.2
 
 - Executor model selection v2 (tracks the private source): specialist executor dispatches are conductor-selected -- Sonnet 5 at `xhigh` or Opus 4.8, picked by the work's judgment depth. Conductor-gated; never below `xhigh` for Sonnet; never Haiku.

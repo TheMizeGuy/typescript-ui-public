@@ -5,9 +5,9 @@ scope: ts6-essentials
 audience: ui-engineer
 ---
 
-# TypeScript 6.0 Essentials for UI Engineers
+# TypeScript 6/7 Essentials for UI Engineers
 
-Covers the TS 6.0 baseline (released 2026-03-23, current LTS line as of 2026-04-14), the tsconfig that any new UI project should ship with, the strictness-ladder for legacy projects, the deprecation warnings that become hard failures in TS 7, and the anti-patterns no UI PR should pass review.
+Covers the TS 6.0 language baseline (released 2026-03-23, the stable line), the tsgo (TypeScript 7) typecheck gate every UI project should run, the tsconfig that any new UI project should ship with, the strictness-ladder for legacy projects, the deprecation warnings that become hard failures in TS 7, and the anti-patterns no UI PR should pass review.
 
 ## What changed in TS 6.0
 
@@ -120,7 +120,7 @@ Adopt incrementally; each step is a separate PR with its own diagnostic wave.
 | 4 | `noPropertyAccessFromIndexSignature` | Convert dot access on dictionary types to bracket access |
 | 5 | `exactOptionalPropertyTypes` | Stop passing `undefined` to optional props; either omit or widen the prop to `T \| undefined`. Largest UI-specific wave; React passes optional props by spreading |
 
-Run each step with `tsc --noEmit` until clean before merging the next.
+Run each step with the typecheck gate (`tsgo --noEmit`) until clean before merging the next.
 
 ## TS 6 → 7 migration warnings
 
@@ -136,18 +136,20 @@ TS 6.0 emits deprecation warnings for behaviors that hard-fail in TS 7. Treat wa
 | Floating compiler defaults (`strict`, `module`, `target`, `types`, `rootDir` unset) | Always set these explicitly |
 | Numeric `enum`, namespace-with-values, parameter properties, `import =`/`export =` | Forbidden under `erasableSyntaxOnly: true`; rewrite as union + `as const` object |
 
-## tsgo native preview status
+## tsgo — the typecheck gate (TypeScript 7)
 
-`tsgo` is the Go port of the compiler shipped as `@typescript/native-preview` and invoked via `npx tsgo`. Status as of 2026-04-14: **preview only**.
+`tsgo` is the Go implementation of the compiler, shipped as `@typescript/native-preview` and invoked via `npx tsgo`. It is the **primary and only typecheck gate**: `npm run typecheck` maps to `tsgo --noEmit`, and CI blocks on it. This superseded the earlier "evaluation lane, run side by side" posture (promoted to primary 2026-06-30).
 
-| Use tsgo for | Avoid tsgo for |
+Dual-compiler, not a swap — tsgo gates, `typescript@^6.0` keeps the lanes that need the TS6 JavaScript Compiler API:
+
+| tsgo's lane (the gate) | Still tsc's lane (emit/tooling — never the gate) |
 |---|---|
-| Whole-project type-check smoke lanes (`tsgo --noEmit`) | Anything depending on the `typescript` Compiler API (ts-morph, ts-loader, custom transformers, codemods) |
-| CI typecheck speed comparisons against `tsc` | JS/JSDoc-heavy projects (closure-style annotations, `@enum`, `@constructor` are intentionally narrowed in the new JS checker) |
-| Large monorepos where `tsc` cold-start dominates | Editor tsserver — tsserver is still TS 6 |
-| Side-by-side validation (run both, compare) | Declaration emit for published libraries (incomplete) |
+| `tsgo --noEmit` on every PR — the CI typecheck gate | `.d.ts` declaration emit for published libraries (`tsc -b`) |
+| Per-surface checks during adoption (`tsgo -p <tsconfig>`) | Anything on the `typescript` Compiler API: ts-morph, ts-jest, Stryker, custom transformers, codemods |
+| Whole-monorepo type-check where `tsc` cold-start dominates | Editor tsserver (still TS6-backed) |
+| Strictness-ladder verification per step | JS/JSDoc-heavy checking (closure-style annotations are intentionally narrowed in the new JS checker) |
 
-Run side by side, never replace. Keep `typescript@^6.0` as the canonical compiler for emit, declarations, editor, and tooling.
+Adoption on an existing project: promote per surface. Run `tsgo --noEmit` against each tsconfig; a surface that fails for tsgo-capability reasons (verify by reading the errors, don't assume) stays on `tsc` while the green set grows, and the tsc gate is retired once every surface is green.
 
 ## Anti-patterns banned in UI code
 
@@ -172,8 +174,8 @@ Three commands every UI engineer should know:
 
 | Command | Purpose |
 |---|---|
+| `npx tsgo --noEmit` | Typecheck without writing files. The canonical CI gate |
 | `tsc --showConfig` | Print the **resolved** config after `extends` merging. Use first when a flag "isn't taking" |
-| `tsc --noEmit` | Typecheck without writing files. The canonical CI gate |
 | `npx tsc --traceResolution 2>&1 \| head -50` | Show how each `import` resolved, in order. Use when a `paths`/`exports`/`bundler` resolution surprises you |
 
 Other diagnostics worth knowing:
@@ -183,7 +185,7 @@ Other diagnostics worth knowing:
 | `tsc --listFiles` | Every file pulled into the program (catches accidental `node_modules` inclusion) |
 | `tsc --extendedDiagnostics` | Type-check timings + memory; find slow `@types/*` |
 | `tsc --generateTrace ./trace` | Chromium-trace-format profile (open with `chrome://tracing`) |
-| `npx tsgo --noEmit` | Native preview type-check; compare timings against `tsc --noEmit` |
+| `npx tsc --noEmit` | TS6 legacy check — only for surfaces not yet tsgo-green, or emit-lane verification |
 
 CI script:
 
@@ -191,9 +193,9 @@ CI script:
 // package.json
 {
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "typecheck:trace": "tsc --noEmit --extendedDiagnostics",
-    "typecheck:fast": "tsgo --noEmit"
+    "typecheck": "tsgo --noEmit",
+    "typecheck:ts6": "tsc --noEmit",
+    "typecheck:trace": "tsc --noEmit --extendedDiagnostics"
   }
 }
 ```

@@ -1,6 +1,6 @@
 # typescript-ui
 
-TypeScript 6 UI engineering team for [Claude Code](https://claude.com/claude-code). Six specialists -- running on the session model, always the strongest available Claude -- that design, review, optimize, and improve UI code so it looks like a senior human design team shipped it, not AI.
+TypeScript 6/7 UI engineering team for [Claude Code](https://claude.com/claude-code). Six specialists -- running on the session model, always the strongest available Claude -- that design, review, optimize, and improve UI code so it looks like a senior human design team shipped it, not AI. Type safety is verified with the tsgo (TypeScript 7) gate.
 
 ## Table of Contents
 
@@ -135,7 +135,7 @@ Dispatches the team lead, who coordinates all 4 specialists, deduplicates findin
 **Specialists dispatched:**
 - `ui-design-reviewer` -- 18 lenses (POV, color, typography, spacing, motion, composition, affordances, feedback, keyboard, screen reader, contrast, WCAG 2.2, density, copy, rhythm, distinctiveness)
 - `ui-anti-slop-auditor` -- 108-tell AI aesthetic catalogue
-- `ui-typescript-engineer` (if the scope includes `.ts`/`.tsx`) -- 10 TS6 angles
+- `ui-typescript-engineer` (if the scope includes `.ts`/`.tsx`) -- 10 TS6/7 angles incl. the tsgo gate
 
 **Output:** merged, deduplicated findings sorted CRITICAL > HIGH > MEDIUM > LOW > NIT.
 
@@ -149,7 +149,7 @@ Dispatches the team lead, who coordinates all 4 specialists, deduplicates findin
 
 **Specialist:** `ui-perf-engineer` -- 12 angles (LCP, INP, CLS, bundle, images, fonts, rendering, React patterns, loading strategy, bfcache, third-party, measurement)
 
-**Runs tooling when available:** `tsc --noEmit`, the project's build command, Lighthouse, bundle analysis.
+**Runs tooling when available:** the typecheck gate (`tsgo --noEmit`; `tsc --noEmit` where tsgo is absent), the project's build command, Lighthouse, bundle analysis.
 
 **Each finding has quantified impact:** "+800ms LCP", "+0.15 CLS", "+120KB JS".
 
@@ -172,7 +172,7 @@ Dispatches the team lead, who coordinates all 4 specialists, deduplicates findin
 | `ui-design-architect` | Cyan | Greenfield design, POV commitment, token systems, production code |
 | `ui-design-reviewer` | Blue | Visual quality, UX, accessibility, POV coherence (18 lenses) |
 | `ui-perf-engineer` | Yellow | Core Web Vitals, bundle, rendering, React perf (12 angles) |
-| `ui-typescript-engineer` | Magenta | TS6 strictness, component typing, state safety (10 angles) |
+| `ui-typescript-engineer` | Magenta | TS6/7 strictness, tsgo gate, component typing, state safety (10 angles) |
 | `ui-anti-slop-auditor` | Red | 108 AI-generated aesthetic tell detection |
 | `ui-team-lead` | Green | Multi-agent orchestration, finding dedup, unified report |
 
@@ -184,7 +184,7 @@ All agents inherit **the session model** -- always the strongest available Claud
 
 | Domain | Files | Covers |
 |---|---|---|
-| `typescript/` | 4 | TS6 essentials, component typing, state typing, branded primitives |
+| `typescript/` | 4 | TS6/7 essentials + tsgo gate, component typing, state typing, branded primitives |
 | `design/` | 6 | OKLCH color, typography, spacing, motion, Tailwind v4, shadcn customization |
 | `aesthetic/` | 4 | 108 anti-AI tells, POV discovery, 12 distinctive-system case studies, taste checklist |
 | `performance/` | 5 | Core Web Vitals, React 19 perf, CSS perf, bundle/loading, measurement |

@@ -4,7 +4,7 @@ Internal map of files, responsibilities, and cross-references. Not loaded by Cla
 
 ## Mission
 
-A team of specialists -- running on the session model, always the strongest available Claude -- that designs, reviews, optimizes, and improves TypeScript UI code so the result looks like a senior human design team shipped it. No generic AI tells. Strict TS6 type safety. Sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS. WCAG 2.2 + APCA contrast. Distinctive aesthetic point-of-view per project, not a recycled template.
+A team of specialists -- running on the session model, always the strongest available Claude -- that designs, reviews, optimizes, and improves TypeScript UI code so the result looks like a senior human design team shipped it. No generic AI tells. Strict TS6/7 type safety, verified with the tsgo (TypeScript 7) gate. Sub-2.5s LCP, sub-200ms INP, sub-0.1 CLS. WCAG 2.2 + APCA contrast. Distinctive aesthetic point-of-view per project, not a recycled template.
 
 ## Layout
 
@@ -22,12 +22,12 @@ typescript-ui/
 │   ├── ui-design-architect.md       creative direction + greenfield design
 │   ├── ui-design-reviewer.md        visual / UX / a11y audit
 │   ├── ui-perf-engineer.md          CWV + bundle + render perf
-│   ├── ui-typescript-engineer.md    TS6 strictness + component-typing
+│   ├── ui-typescript-engineer.md    TS6/7 strictness + tsgo gate + component-typing
 │   ├── ui-anti-slop-auditor.md      AI-tell catcher
 │   └── ui-team-lead.md              orchestrator for typescript-improve-ui multi-pass
 └── references/              (self-contained knowledge base, agents read these)
     ├── typescript/
-    │   ├── 01-ts6-essentials.md           TS6 defaults, strictness, what changed
+    │   ├── 01-ts6-essentials.md           TS6/7 defaults, tsgo gate, strictness, what changed
     │   ├── 02-component-typing.md         Polymorphic, compound, slot, ref forwarding
     │   ├── 03-state-typing.md             Discriminated unions for UI state
     │   └── 04-branded-primitives.md       UserId, Pixels, Hex -- nominal in UI

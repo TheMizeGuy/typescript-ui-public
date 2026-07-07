@@ -78,7 +78,7 @@ TASK:
    a. ui-design-reviewer — visual + UX + accessibility
    b. ui-anti-slop-auditor — AI-tell detection
    c. ui-perf-engineer — CWV + bundle + rendering
-   d. ui-typescript-engineer — TS6 strictness + component typing
+   d. ui-typescript-engineer — TS6/7 strictness, tsgo gate, component typing
 3. Each specialist gets the full PROJECT CONTEXT above.
 4. Wait for all 4.
 5. Merge findings: deduplicate, re-rank by impact, number sequentially.
@@ -131,7 +131,7 @@ Dispatch via `general-purpose`, not the plugin namespace — `ui-team-lead` decl
 ## Step 6: Post-application verification
 
 After applying any fixes:
-1. Run `tsc --noEmit` to verify compilation.
+1. Run the typecheck gate (`tsgo --noEmit`; `tsc --noEmit` where tsgo is absent) to verify compilation.
 2. Run the project's lint command.
 3. If Tailwind: check that `@theme` tokens are valid.
 4. Report any breakage with the fix — offer to iterate.

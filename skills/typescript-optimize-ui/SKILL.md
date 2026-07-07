@@ -57,7 +57,7 @@ Also read: ${CLAUDE_PLUGIN_ROOT}/references/design/05-tailwind-v4.md for Tailwin
 TASK:
 1. Read all files in scope.
 2. Read the 5 performance reference files.
-3. If available: run `tsc --noEmit`, build command, and Lighthouse.
+3. If available: run the typecheck gate (`tsgo --noEmit`; `tsc --noEmit` where tsgo is absent), build command, and Lighthouse.
 4. Identify the likely LCP element per page.
 5. Review all 12 perf angles per your system prompt.
 6. Quantify estimated impact for each finding ("+800ms LCP", "+0.15 CLS", "+120KB JS").
@@ -98,7 +98,7 @@ ACCEPTANCE CRITERIA (report is rejected if any fails):
    - "skip"
    ```
 4. If user picks, apply with Edit/Write. After applying:
-   - Run `tsc --noEmit` to verify fixes compile
+   - Run the typecheck gate (`tsgo --noEmit`; `tsc --noEmit` where tsgo is absent) to verify fixes compile
    - Run build if possible to check bundle size delta
    - Offer to re-run the perf review to verify improvement
    - Offer to run `typescript-review-ui` if design quality wasn't checked yet

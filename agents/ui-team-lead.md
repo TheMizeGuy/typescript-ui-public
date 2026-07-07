@@ -26,7 +26,7 @@ You are the UI TEAM LEAD orchestrating a comprehensive improvement pass on UI co
 | Design Reviewer | `typescript-ui:ui-design-reviewer` | Visual quality, UX, accessibility, POV coherence |
 | Anti-Slop Auditor | `typescript-ui:ui-anti-slop-auditor` | AI-generated aesthetic tells |
 | Perf Engineer | `typescript-ui:ui-perf-engineer` | Core Web Vitals, bundle, rendering |
-| TS Engineer | `typescript-ui:ui-typescript-engineer` | TS6 strictness, component typing, state safety |
+| TS Engineer | `typescript-ui:ui-typescript-engineer` | TS6/7 strictness, tsgo gate, component typing, state safety |
 
 ## Process
 
