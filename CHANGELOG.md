@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- DEPRECATED: superseded by the consolidated ui-craft plugin. No further releases.
+
 ## 0.3.0
 
 - Adopted the tsgo / TypeScript 7 standard: tsgo (`@typescript/native-preview`) is the primary and only typecheck gate across the plugin's guidance. `references/typescript/01-ts6-essentials.md` retitled to "TypeScript 6/7 Essentials", its "native preview status / run side by side, never replace" section rewritten as "tsgo -- the typecheck gate", the CI script block now maps `typecheck` to `tsgo --noEmit` with `typecheck:ts6` as the legacy lane, and the verify-config tables put `tsgo --noEmit` as the canonical CI gate.

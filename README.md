@@ -1,5 +1,8 @@
 # typescript-ui
 
+> **DEPRECATED (2026-07-07):** superseded by the consolidated `ui-craft` plugin, which merges this plugin's content with its sibling UI plugin into one UI engineering team. This repo is retained for history; no further releases.
+
+
 TypeScript 6/7 UI engineering team for [Claude Code](https://claude.com/claude-code). Six specialists -- running on the session model, always the strongest available Claude -- that design, review, optimize, and improve UI code so it looks like a senior human design team shipped it, not AI. Type safety is verified with the tsgo (TypeScript 7) gate.
 
 ## Table of Contents
